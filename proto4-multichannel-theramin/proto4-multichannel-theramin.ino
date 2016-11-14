@@ -415,7 +415,7 @@ bool shouldGlow = true;
 // Where to do MIDI, wireless communication? 
 // Balancing lag and wireless comm with other things.  
 void loop() {
-  if( iter == 20  ) { 
+  if( iter % 100 == 20  ) { 
     ensureCorrectFrequency();
   }
   window[iter % 100] = sense(0);
@@ -439,7 +439,7 @@ void loop() {
     wait = 0;
   }
   else { 
-    wait = (wait + 1.0) / 2;
+    wait = (wait - .5) * 2;
   }
   wait = wait * wait * wait * wait * 1000;
   Serial.print("wait: ");
@@ -452,9 +452,9 @@ void loop() {
   
 
    
-    switchOutputs(noGlow);
-    delayMicroseconds(2000 - wait);
     switchOutputs(glow);
+    delayMicroseconds(1000 - wait);
+    switchOutputs(noGlow);
     delayMicroseconds(wait);
 
      iter++;
