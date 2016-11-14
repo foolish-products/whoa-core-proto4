@@ -433,10 +433,11 @@ void loop() {
 // //    Serial.print("  ---  ");
 // //    Serial.println((val / 1024.0) * 3.3 / 3.0);
 //  
+int triggerLevel = 20;
      if (val != 0 && 
      //    prevVal[(iter - 2) % prevValSize][0] != 0 && 
      // bike jacket 35? 
-         prevVal[(iter - 5) % prevValSize][0] - val > 20) { 
+         prevVal[(iter - 5) % prevValSize][0] - val > triggerLevel) { 
         Serial.println("BLAH BLAH BLAH BLAH");
         shouldGlow = !shouldGlow;
         switched[0]++;
